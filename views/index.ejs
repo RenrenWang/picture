@@ -1,0 +1,293 @@
+<%- include top %>
+<div class="header clearfix" id="header">
+	<div class="container">
+		<h1 class="logo fl">
+    			<a href="/"></a>
+    	   </h1>
+		<ul class="nav header-nav fl">
+			<li>
+				<a href="/" class="active">最新</a>
+			</li>
+			<li>
+				<a href="/imgs/s/show">学生精品</a>
+			</li>
+			<li>
+				<a href="/imgs/t/show/">老师精品</a>
+			</li>
+		</ul>
+		<ul class="nav fr">
+			<% if(username&&avatar) {%>
+			<li class="playd">
+				<a href="javascript:;" class="header-avatar"><img src="/avatar/<%= avatar %>" /></a>
+				<ul class="play-dw">
+					<li>
+						<a href="users/personal/<%= user_id %>">个人中心</a>
+					</li>
+					<li style="border: none;">
+						<a href="/users/logout">退出</a>
+					</li>
+
+				</ul>
+
+			</li>
+			<%} else{%>
+
+			<li>
+				<a href="javascript:;" id="register" class="btn aregister">注册</a>
+			</li>
+			<li>
+				<a href="javascript:;" id="login" class="btn alogin">登录</a>
+
+			</li>
+			<%  } %>
+		</ul>
+
+	</div>
+</div>
+
+<div class="banner">
+
+</div>
+
+<div class="warp" style="background: #fff;">
+	<div class="container">
+		<div class="section">
+			<h2 class="title">大家正在关注</h2>
+			<div class="category-image-box">
+				<a href="" class="category-image">
+					<div class="blur"><img src="/img/b1.jpg" ></div>
+					<div class="category-image-title">素描 </div>
+				</a>
+				<a href="" class="category-image ">
+					<div class="blur"><img src="/img/b2.jpg"></div>
+					<div class="category-image-title">色彩</div>
+				</a>
+				<a href="" class="category-image last ">
+					<div class="blur"><img src="/img/b3.jpg""></div>
+					<div class="category-image-title">速写</div>
+				</a>
+			</div>
+		</div>
+		<div class="section">
+			<h2 class="title">为您推荐</h2>
+			<div id="recommend_container" class="recommend-container">
+
+			</div>
+			<a href="javascript:void(0);" class="list-more">加载更多</a>
+		</div>
+	</div>
+
+
+
+</div>
+<%- include footer %>
+
+<%- include pop %>
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/jquery.easing.js"></script>
+<script src="/js/waterfall.min.js"></script>
+<script type="text/javascript" src="/js/app.js"></script>
+<!-- Initialize Swiper -->
+<script>
+
+
+
+		$(window).on('scroll', function() {
+		//console.log(parseInt($(this).scrollTop() / 8));
+		$('.banner').css('backgroundPosition', 'center ' + (-$(this).scrollTop() / 8) + 'px');
+		if($(this).scrollTop() > 200) {
+			$('#header').addClass('active');
+			$('.logo a').addClass('logoActive');
+			$('#login').removeClass('alogin');
+
+		} else {
+			$('#header').removeClass('active');
+			$('.logo a').removeClass('logoActive');
+			$('#login').addClass('alogin');
+		}
+	})
+	var  page=1;
+
+	getm(1);
+$('.list-more').on('click',function(){
+	 if(!getm(++page)){
+	 	$(this).text("没有更多数据！！");
+	 	$(this).off('click');
+	 }
+});
+	function getm(p) {
+		$.ajax({
+			type: "get",
+			url: "/imgs/page/"+p,
+			async: true,
+			success: function(data) {
+				if(data.status == 0) {
+					return false;
+				}
+
+				var html = '';
+
+				var arr = data.list.imglist;
+                if(data.list.total<15){
+                	$(".list-more").text("没有更多数据！！");
+	 	             $(".list-more").off('click');
+                }
+				function group(array, subGroupLength) {
+					var index = 0;
+					var newArray = [];
+
+					while(index < array.length) {
+						newArray.push(array.slice(index, index += subGroupLength));
+					}
+
+					return newArray;
+				}
+
+				var array_1 = group(arr, 3);
+			   if(p%2==1){
+			   		for(var n = 0; n < array_1.length; n++) {
+
+					if(array_1[n].length <= 1) {
+						if(n % 2 == 0) {
+
+							htmlRow_2(0, array_1[n][0]);
+						} else {
+							htmlRow_1(0, array_1[n][0]);
+
+						}
+					} else {
+						for(var i = 0; i < array_1[n].length; i++) {
+							if(n % 2 == 0) {
+									htmlRow_2(i, array_1[n][i]);
+							} else {
+
+								htmlRow_1(i, array_1[n][i]);
+							}
+
+						}
+					}
+
+				}
+			   }else{
+			   		for(var n = 0; n < array_1.length; n++) {
+
+					if(array_1[n].length <= 1) {
+						if(n % 2 == 0) {
+
+							htmlRow_1(0, array_1[n][0]);
+						} else {
+							htmlRow_2(0, array_1[n][0]);
+						}
+					} else {
+						for(var i = 0; i < array_1[n].length; i++) {
+							if(n % 2 == 0) {
+								htmlRow_1(i, array_1[n][i]);
+							} else {
+								htmlRow_2(i, array_1[n][i]);
+							}
+
+						}
+					}
+
+				}
+			   }
+
+				function htmlRow_1(t, imglist) {
+
+					if(t % 3 == 0)
+						html += html_img(imglist['id'], imglist['imgurl']);
+					if(t % 3 == 0) {
+						html += '<div class="recommend-box">' + html_text_l(imglist['id'],imglist['description'], imglist['c_count'], imglist['username']);
+					}
+					if(t % 3 == 1) {
+
+						html += html_text_r(imglist['id'],imglist['description'], imglist['c_count'], imglist['username']) + '</div>' + html_img(imglist['id'], imglist['imgurl']);
+
+					}
+
+					if(t % 3 == 2)
+					html += html_img_text(imglist['id'], imglist['imgurl'], imglist['description'], imglist['c_count'], imglist['username']);
+
+				}
+
+				function htmlRow_2(t, imglist) {
+					if(t % 3 == 1)
+						html += html_img(imglist['id'], imglist['imgurl']);
+					if(t % 3 == 1) {
+						html += '<div class="recommend-box">' + html_text_l(imglist['id'],imglist['description'], imglist['c_count'], imglist['username']);
+					}
+					if(t % 3 == 2) {
+
+						html += html_text_r(imglist['id'],imglist['description'], imglist['c_count'], imglist['username']) + '</div>' + html_img(imglist['id'], imglist['imgurl']);
+
+					}
+
+					if(t % 3 == 0)
+						html += html_img_text(imglist['id'], imglist['imgurl'], imglist['description'], imglist['c_count'], imglist['username']);
+
+				}
+
+				$('#recommend_container').append('<div class="recommend-container-row clearfix">' + html + '</div>');
+
+				return true;
+			}
+		});
+	}
+
+	function html_img(img_id, imgurl) {
+		return '<div class="recommend-imgbox recommend-box"><a href="/imgs/details_1/' + img_id + '"><img src="/upload/' + imgurl + '"></a></div>';
+	}
+
+	function html_text_l(img_id,img_description, c_count, img_username) {
+		return '<div class="recommend-infobox board small">' +
+			'<div class="recommend-data board"></div>' +
+			'<h2><a href="/imgs/details_1/' + img_id + '">' + img_description + '</a></h2>' +
+			'<p><span>评论（' + c_count + '）</span></p><span>来自<a href="javascript:;" rel="nofollow">' + img_username + '</a></span></div>' +
+			'<div class="info-tra-left"></div>';
+	}
+
+	function html_text_r(img_id,img_description, c_count, img_username) {
+		return '<div class="recommend-infobox board small pl-right">' +
+			'<div class="recommend-data board"></div>' +
+			'<h2><a href="/imgs/details_1/'+img_id+'">' + img_description + '</a></h2>' +
+			'<p><span>评论（' + c_count + '）</span></p><span>来自<a href="javascript:;" rel="nofollow">' + img_username + '</a></span></div>' +
+			'<div class="info-tra-right"></div>';
+	}
+
+	function html_img_text(img_id, imgurl, img_description, c_count, img_username) {
+		return '<div class="recommend-hidebox pl-right">' +
+			'<div class="recommend-imgbox recommend-box">' +
+			'<a href="/imgs/details_1/'+img_id+'"><img src="/upload/' + imgurl + '"></a>' +
+			'</div>' +
+			'<div class="recommend-infobox board recommend-box big">' +
+			'<div class="recommend-data board"></div>' +
+			'<h2><a href="/imgs/details_1/'+img_id+'">' + img_description + '</a></h2>' +
+			'<p><span>评论（' + c_count + '）</span></p><span>来自<a href="javascript:;" rel="nofollow">' + img_username + '</a></span>' +
+			'<div class="info-tra-left big"></div>' +
+			'</div>' +
+			'</div>';
+	}
+
+
+</script>
+</body>
+
+</html>
+
+<!--
+	content += '<a class="box" href="/imgs/details_1/' + imglist[t]['id'] + '">' +
+							'<img src="/upload/' + imglist[t]['imgurl'] + '" />' +
+							'<div class="imgItem-text">' +
+							'	<p class="description">' +
+							imglist[t]['description'] +
+							'	</p>' +
+							'	<p class="img-info">' +
+							'		<span class="img-info-avatar author"><img src="/avatar/' + imglist[t]['avatar'] + '"/></span>' +
+							'		<span class="img-info-author fl">' + imglist[t]['username'] + '</span>' +
+							'		<span class="time fl">' + changTime(imglist[t]['create_time']) + '</span>' +
+							'		<span class="c-number fr">评论（99999）</span>' +
+							'	</p>' +
+							'</div>' +
+							'</a>';
+-->

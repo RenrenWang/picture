@@ -1,0 +1,137 @@
+<%- include top %>
+<%- include commonHeader %>
+<link rel="stylesheet" href="/css/webuploader.css" />
+<div class="add-content">
+	<div class="container">
+		<h3>
+			作品上传
+		</h3>
+		<form class="add-from">
+			<div class="input-group">
+				<label class="clear-label">描述：</label>
+				<textarea rows="3" class="textarea clear-input" name="description"></textarea>
+			</div>
+
+			<div class="input-group">
+				<label class="clear-label">图片：</label>
+				<!--dom结构部分-->
+				<div id="uploader-demo" style="display: inline-block;vertical-align: middle;">
+
+					<div id="filePicker" class="btn">选择图片</div>
+
+				</div>
+				<!--用来存放item-->
+				<div id="fileList" class="uploader-list" style="margin-left: 48px;"></div>
+			</div>
+			<div class="input-group">
+				<label class="clear-label">分类：</label>
+				<select class="select clear-input" name="kind">
+					<option value="0">素描</option>
+					<option value="1">色彩</option>
+					<option value="2">速写</option>
+				</select>
+			</div>
+			<div class="input-group">
+				<label class="clear-label">是否公开：</label>
+				<label class="radio-inline">
+                    <input type="radio" name="open" value="1" checked> 是
+                 </label>
+				<label class="radio-inline">
+                    <input type="radio" name="open"  value="-1"> 否
+                </label>
+			</div>
+			<a href="javascript:;" class="btn  up-save" id="up-save">提交</a>
+		</form>
+	</div>
+</div>
+<%- include footer %>
+<script src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/webuploader.min.js"></script>
+<script>
+	$('#header').addClass('active');
+	$('.logo a').addClass('logoActive');
+	$('#login').removeClass('alogin');
+	$('#up-save').click(function(){
+		var description=$("textarea[name='description']").val();
+		var kind=$("select[name='kind']").val();
+		var open=$("input:radio[name='open']:checked").val();
+		$.ajax({
+				type: "post",
+				url: '/imgs/add/text',
+				data: { "description": description, "kind": kind,"open":open},
+				async: true,
+				success: function(data) {
+					if(data.status==1){
+						window.location.href="/users/personal/"+data.user_id;
+					}else if(data.status==0){
+						alert(data.error);
+					}
+					//alert(data.status);
+				  }
+				})
+	});
+	
+	var uploader = WebUploader.create({
+
+				// 选完文件后，是否自动上传。
+				auto: true,
+
+				// swf文件路径
+				swf: '/js/Uploader.swf',
+
+				// 文件接收服务端。
+				server: '/imgs/add/img',
+
+				// 选择文件的按钮。可选。
+				// 内部根据当前运行是创建，可能是input元素，也可能是flash.
+				pick: '#filePicker',
+
+				// 只允许选择图片文件。
+				accept: {
+					title: 'Images',
+					extensions: 'gif,jpg,jpeg,bmp,png',
+					mimeTypes: 'image/*'
+				}
+			});
+			// 当有文件添加进来的时候
+			uploader.on('fileQueued', function(file) {
+				var $li = $(
+						'<div id="' + file.id + '" class="file-item thumbnail">' +
+						'<img>' +
+						'<div class="info">' + file.name + '</div>' +
+						'</div>'
+					),
+					$img = $li.find('img');
+
+				// $list为容器jQuery实例
+				$('#fileList').append($li);
+
+				// 创建缩略图
+				// 如果为非图片文件，可以不用调用此方法。
+				// thumbnailWidth x thumbnailHeight 为 100 x 100
+				uploader.makeThumb(file, function(error, src) {
+					if(error) {
+						$img.replaceWith('<span>不能预览</span>');
+						return;
+					}
+
+					$img.attr('src', src);
+				}, 100, 100);
+			});
+
+			// 文件上传失败，显示上传出错。
+			uploader.on('uploadError', function(file) {
+				var $li = $('#' + file.id),
+					$error = $li.find('div.uploaderror');
+
+				// 避免重复创建
+				if(!$error.length) {
+					$error = $('<div class="uploaderror"></div>').appendTo($li);
+				}
+
+				$error.text('上传失败');
+			});
+</script>
+</body>
+
+</html>

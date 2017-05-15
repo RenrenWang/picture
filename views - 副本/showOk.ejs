@@ -1,0 +1,129 @@
+<%- include top %>
+<%- include commonHeader %>
+<div class="details"  >
+    <div class="waterfall"></div>
+</div>
+<style>
+#iframe{
+
+}
+</style>
+<div class="w-panel">
+  <a href="javascript:;" class="w-panel-close"><img src="/img/btn_close_layer.png"/></a>
+    <div class="w-panel-content"  width="1030px" style="margin:0 auto;">
+          <iframe src="" width="1030px" height="100%" id="iframe" style="margin:0 auto;border:none"></iframe>
+    </div>
+
+</div>
+<%- include pop %>
+
+<script src="/js/jquery.min.js"></script>
+
+<script src="/js/jquery.easing.js"></script>
+<script src="/js/waterfall.min.js"></script>
+<script type="text/javascript" src="/js/app.js"></script>
+
+<script>
+
+	$('.waterfall').waterfall({
+		itemCls: 'item',
+		colWidth:300,
+		gutterWidth: 5,
+		gutterHeight: 5,
+		checkImagesLoaded: true,
+		isAnimated: true,
+		dataType:'json',
+		animationOptions: {},
+		path: function(page) {
+			return '/imgs/<%=type%>/ok/' + page;
+		},
+		callbacks: {
+		/*
+		 * loadingStart
+		 * @param {Object} loading $('#waterfall-loading')
+		 */
+		loadingStart: function($loading) {
+			$loading.show();
+			//console.log('loading', 'start');
+		},
+
+		/*
+		 * loadingFinished
+		 * @param {Object} loading $('#waterfall-loading')
+		 * @param {Boolean} isBeyondMaxPage
+		 */
+		loadingFinished: function($loading, isBeyondMaxPage) {
+			if ( !isBeyondMaxPage ) {
+				$loading.fadeOut();
+				//console.log('loading finished');
+			} else {
+				//console.log('loading isBeyondMaxPage');
+				$loading.remove();
+			}
+		},
+
+		/*
+		 * loadingError
+		 * @param {String} xhr , "end" "error"
+		 */
+		loadingError: function($message, xhr) {
+
+			$message.html("获取数据失败....");
+		},
+
+		/*
+		 * renderData
+		 * @param {String} data
+		 * @param {String} dataType , "json", "jsonp", "html"
+		 */
+		renderData: function (data, dataType) {
+
+
+				if(data.status==0){
+					 //$('.list-more').text(data.error);
+
+             $('.waterfall').waterfall('pause', function() {
+                    $('#waterfall-message').html('<p style="color:#666;">'+data.error+'...</p>')
+                });
+              return false;
+			}
+
+			if ( dataType === 'json' ||  dataType === 'jsonp'  ) { // json or jsonp format
+//				tpl = $('#waterfall-tpl').html();
+//				template = Handlebars.compile(tpl);
+				var html='';
+				//return template(data);
+
+			//	var imglist=data.data;
+
+				for(var t=0;t<data.list.total;t++){
+//<a class="item" href="/imgs/details/' + data.list.imglist[t]['id'] + '">
+					html +='<div><a class="item showPanel"  data-id="'+data.list.imglist[t]['id']+'" href="javascript:;">' +
+							'<img src="/upload/' + data.list.imglist[t]['imgurl'] + '" />' +
+							'<div class="imgItem-text">' +
+							'	<p class="description">' +
+							data.list.imglist[t]['description'] +
+							'	</p>' +
+							'	<p class="img-info">' +
+							'		<span class="img-info-avatar author"><img src="/avatar/' + data.list.imglist[t]['avatar'] + '"/></span>' +
+							'		<span class="img-info-author fl">' + data.list.imglist[t]['username'] + '</span>' +
+							'		<span class="time fl">' + changTime(data.list.imglist[t]['create_time']) + '</span>' +
+							'		<span class="c-number fr">评论（'+data.list.imglist[t]['c_count']+'）</span>' +
+							'	</p>' +
+							'</div>'+
+							'</a><span class="dz-btn" >点赞</span>'+
+              '<span class="cj-btn">采集</span></div>';
+
+				}
+			  return html;
+			} else { // html format
+				return data;
+			}
+		}
+	}
+
+	});
+	</script>
+</body>
+
+</html>

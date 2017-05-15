@@ -1,0 +1,45 @@
+<div class="header clearfix common-header" >
+	<div class="container">
+		<h1 class="logo fl">
+    			<a href="/" class="logoActive"></a>
+    	   </h1>
+		<ul class="nav header-nav fl">
+			<li>
+				<a href="/" <% if(activePage==1){ %> class="active"<%}%>>最新</a>
+			</li>
+			<li>
+				<a href="/imgs/s/show" <% if(activePage==2){ %> class="active"<%}%>>学生精品</a>
+			</li>
+			<li>
+				<a href="/imgs/t/show/" <% if(activePage==3){ %> class="active"<%}%>>老师精品</a>
+			</li>
+		</ul>
+		<ul class="nav fr">
+			<% if(username&&avatar) {%>
+			<li class="playd">
+				<a href="javascript:;" class="header-avatar"><img src="/avatar/<%= avatar %>" /></a>
+				<ul class="play-dw">
+					<li>
+						<a href="/users/personal/<%= user_id %>">个人中心</a>
+					</li>
+					<li style="border: none;">
+						<a href="/users/logout">退出</a>
+					</li>
+
+				</ul>
+
+			</li>
+			<%} else{%>
+
+			<li>
+				<a href="javascript:;" id="register" class="btn aregister">注册</a>
+			</li>
+			<li>
+				<a href="javascript:;" id="login" class="btn alogin">登录</a>
+
+			</li>
+			<%  } %>
+		</ul>
+
+	</div>
+</div>

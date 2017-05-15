@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>infinitescroll</title>
+
+		<link rel="stylesheet" href="/css/reset.css">
+		<link rel="stylesheet" href="/css/index.css">
+		<link rel="stylesheet" href="css/waterfall.css">
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	<style>
+		html,
+		body {
+			background: url(/images/bg.gif) repeat #edece9;
+		}
+
+		.description {
+			display: block;
+			padding: 0 16px;
+			margin: 10px 0;
+			line-height: 1.35em;
+			overflow: hidden;
+			word-wrap: break-word;
+		}
+	</style>
+
+	<a href="/" <% if(activePage==1){ %> class="active"<%}%>>最新</a>
+
+
+	<a href="/imgs/s/show" <% if(activePage==2){ %> class="active"<%}%>>学生精品</a>
+
+
+	<a href="/imgs/t/show/" <% if(activePage==3){ %> class="active"<%}%>>老师精品</a>
+
+	<body>
+		<div id="header" class="" style="left: 0px;">
+			<div class="wrapper" style="width: 1244px;">
+				<div class="menu-bar">
+					<div class="left-part">
+						<a id="huaban" href="/"></a>
+						<a href="/" data-title="home"<% if(activePage==1){ %> class="header-item active"<%}else{%> class="header-item" <%}%> >首页</a>
+
+						<a href="/imgs/s/show"<% if(activePage==2){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>学生精品<i class="muse entrance"></i></a>
+						<a  href="/imgs/t/show/" target="_blank" <% if(activePage==3){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>老师精品</a>
+						<div class="menu-nav">
+							<div class="header-main-menu" style="display: none;">
+								<div class="top-module">
+									<a href="/apps/" rel="nofollow" class="text app-link">移动应用</a>
+									<a href="/about/goodies/" rel="nofollow" class="text app-link">采集工具</a>
+									<a href="/activities/" rel="nofollow" class="text pin-link">活动</a>
+								</div>
+								<div id="category_more" class="middle-module clearfix">
+									<div class="col-1 col">
+										<a href="/favorite/web_app_icon/" rel="nofollow" data-id="web_app_icon" class="category-link">UI/UX</a>
+										<a href="/favorite/design/" rel="nofollow" data-id="design" class="category-link">平面</a>
+										<a href="/favorite/illustration/" rel="nofollow" data-id="illustration" class="category-link">插画/漫画</a>
+										<a href="/favorite/home/" rel="nofollow" data-id="home" class="category-link">家居/家装</a>
+										<a href="/favorite/apparel/" rel="nofollow" data-id="apparel" class="category-link">女装/搭配</a>
+									</div>
+									<div class="col-2 col">
+										<a href="/favorite/men/" rel="nofollow" data-id="men" class="category-link">男士/风尚</a>
+										<a href="/favorite/wedding_events/" rel="nofollow" data-id="wedding_events" class="category-link">婚礼</a>
+										<a href="/favorite/industrial_design/" rel="nofollow" data-id="industrial_design" class="category-link">工业设计</a>
+										<a href="/favorite/photography/" rel="nofollow" data-id="photography" class="category-link">摄影</a>
+										<a href="/categories/" rel="nofollow" data-id="more" class="all-categories-link category-link">兴趣/生活 »</a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="right-part">
+						<a style="display: none" href="#" onclick="return false;" class="go-mobile btn rbtn"><span class="text"> 访问移动版</span></a>
+
+						<div id="nav_user">
+							<a href="/w1123224/" class="nav-link dm-nav"><img width="26" height="26" src="//img.hb.aicdn.com/eead355b732f022f1fb52a00528c25bb4386a3621265-qQOGuE_sq75sf" data-baiduimageplus-ignore="1" class="avt">
+								<div class="arrow"></div>
+								<div class="num ">1</div>
+							</a>
+
+						</div>
+					</div>
+
+					<div class="search-hint"></div>
+				</div>
+			</div>
+		</div>
+		<div id="container" style="top: 80px;"></div>
+		<script type="text/x-handlebars-template" id="waterfall-tpl">
+			{{#result}}
+
+			<div class="item pin wfc " data-src="{{imgurl}}">
+				<div class="hidden">
+					<a href="/eg2pqrpdow/">铁血小mm</a>采集到
+					<a href="/boards/18641461">UI_卡片式</a>
+				</div>
+				<div class="actions">
+					<div class="right">
+						<a data-id="1144715085" title="喜欢" href="#" onclick="return false;" class="like btn-with-icon btn btn14"><i class="heart"></i><span class="text"> </span></a>
+					</div>
+					<div class="left">
+						<a onclick="" href="#" class="repin btn btn14 rbtn"><span class="text"> 采集</span></a>
+					</div>
+				</div>
+				<a  target="_self" rel=""  onclick="showImg(1111)" class="img x layer-view loaded">
+					<div class="default-bg">zcool.com.cn</div> <img src="/upload/{{imgurl}}" width="100%" /><span style="display: none" class="stop"></span>
+					<div class="cover">
+
+						<div class="cover">
+							<div class="tag-cover"></div>
+						</div>
+					</div>
+				</a>
+				<p data-raw="原创作品：#2016作品合集-不忘初心#  " class="description">原创作品：#2016作品合集-不忘初心# </p>
+				<div class="convo attribution clearfix">
+					<a href="/eg2pqrpdow/" title="铁血小mm" rel="nofollow" class="img x"><img src="//img.hb.aicdn.com/9d01847e908c93a26ea75373db04c055de7c6b8773ff-1fQt3k_sq75sf" data-baiduimageplus-ignore="1" class="avt"></a>
+					<div class="text">
+						<div class="inner">
+							<div class="line">
+								<a href="/eg2pqrpdow/" rel="" class="author x">铁血小mm</a>&nbsp;采集到</div>
+							<div class="line">
+								<a href="/boards/18641461/" rel="" class="x">UI_卡片式</a>
+							</div>
+							<a title="评论" class="replyButton"></a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			{{/result}}
+		</script>
+
+		<!--
+        	弹窗
+        -->
+
+		<div id="pin_view_layer">
+			<div class="close-layer" onclick="hideImg()"> <i></i></div>
+			<div data-id="1088507615" data-media-type="0" data-board-id="35625540" data-size-x="3648" data-size-y="5472" class="pin-view">
+				<div class="pin-view-wrapper">
+					<div class="main-part">
+						<div class="image-piece piece">
+							<div class="tool-bar">
+								<a onclick="app.requireLogin(function(){app.showDialogBox('repin', {pin_id: '1088507615'});});return false;" href="#" class="repin-btn btn rbtn"><span class="text"> 采集</span></a>
+								<a data-id="1088507615" href="#" onclick="return false;" class="like-btn  btn-with-icon btn"><i class="heart"></i></a>
+
+							</div>
+							<div class="main-image">
+								<div id="baidu_image_holder" class="image-holder"><img src="//img.hb.aicdn.com/2b4fc6ff45b03b4721f9f4c34f2fa94719ee10e32e4a8f-Qekzj3_fw658" width="658" height="987" alt="时间：2017.04.03
+场地：人民公..." data-baiduimageplus-ignore="1"></div>
+							</div>
+							<div class="tool-bar-bottom">
+								<a onclick="app.requireLogin(function(){app.showDialogBox('repin', {pin_id: '1088507615'});});return false;" href="#" class="repin-btn btn-with-icon btn"><i class="class"></i><span class="text"> 采集 <span class="num">13</span></span>
+								</a>
+								<a href="#" onclick="return false;" class="like-btn btn-with-icon btn"><i class="class"></i><span class="text"> 喜欢 <span class="num">4</span></span>
+								</a>
+								<a href="#" onclick="return false;" class="comment-btn btn-with-icon btn"><i class="class"></i><span class="text"> 评论 <span class="num"></span></span>
+								</a>
+								<!--btn.download-btn(href='#{imgURL(pin.file)}', target='_blank', download) #{((pin.file.type || '').substring(6) || 'jpeg').toUpperCase()}-->
+								<!--    i.new-->
+								<!--    i-->
+								<div class="right-part">
+									<a title="举报这张采集" href="#" onclick="return false;" class="report-btn btn-with-icon btn"><i class="class"></i></a>
+									<a href="/pins/1088507615" target="_blank" rel="nofollow" class="come-from creation-user btn wbtn btn-with-icon x">© 来自<span class="brown-link">@佐木樱子</span>的版权作品</a>
+								</div>
+							</div>
+							<div class="extra-box"></div>
+						</div>
+						<div class="info-piece piece">
+							<div class="info">
+								<a href="/cuixiaoyan8647/" title="佐木樱子" rel="nofollow" class="img x"><img src="//img.hb.aicdn.com/b73f5e6e134a0fbf41b69e030638b6bea2a3a47013c2-dWVTno_sq75sf" data-baiduimageplus-ignore="1" class="avt"></a>
+								<div class="main">
+									<a href="/cuixiaoyan8647/" rel="nofollow">佐木樱子</a>
+								</div>
+								<div class="sub">采集于<span data-ts="1491379526" class="ts-words space">2017-04-05 16:05:26</span></div>
+							</div>
+							<div class="description">时间：2017.04.03<br>场地：人民公园<br>出镜：林小夏<br>其实在很久之前就约林小夏说要我们俩要去拍个春天的了，但是后面一直拖。<br>那一天我在微信发信息给林小夏说，过来给我练妆，顺便拍照可好呢！？<br>随后，一个“好”字发过来。<br>林小夏说她没有衣服，我说我学校有很多，但是我没有跟她说要给她化个新娘妆，于是林小夏就这样当了一回新娘了，哈哈哈</div>
+							<div class="comments"></div>
+							<div id="pin_view_add_comment" data-id="1088507615" class="clearfix">
+								<a href="/w1123224/" title="9gjpRrqs" class="img x"><img src="//img.hb.aicdn.com/eead355b732f022f1fb52a00528c25bb4386a3621265-qQOGuE_sq75sf" data-baiduimageplus-ignore="1" class="avatar"></a><textarea name="caption" placeholder="添加评论或把采集@给好友" class="clear-input"></textarea>
+								<a href="#" onclick="return false;" class="post disabled btn btn14"><span class="text"> 添加评论</span></a>
+							</div>
+							<div class="likes clearfix">
+								<h4>4喜欢</h4>
+								<a href="/wnxex3quvw/" title="东城西就zl" class="img x"><img width="46" height="46" src="//img.hb.aicdn.com/1fff67f1031dcd3f6393c31427dbe70a0b8c6a8a6d24-GFpZyA_sq75sf" data-baiduimageplus-ignore="1"></a>
+								<a href="/jixews6nou/" title="Ryanden" class="img x"><img width="46" height="46" src="//img.hb.aicdn.com/cad19d28bfa2e1827d2583454b29c775e7d3e8a0bd212-og7s23_sq75sf" data-baiduimageplus-ignore="1"></a>
+								<a href="/chenlijuan4258/" title="N陌路" class="img x"><img width="46" height="46" src="//img.hb.aicdn.com/f0170984d31e6f1c3944bb0b6bd552e6ecb22cf2a19-UIOvzO_sq75sf" data-baiduimageplus-ignore="1"></a>
+								<a href="/jxwybabyoy/" title="死流星" class="img x"><img width="46" height="46" src="//img.hb.aicdn.com/654953460733026a7ef6e101404055627ad51784a95c-B6OFs4_sq75sf" data-baiduimageplus-ignore="1"></a>
+							</div>
+						</div>
+
+					</div>
+					<div class="side-part">
+						<div class="board-piece piece">
+							<div class="board-info">
+								<a href="/cuixiaoyan8647/" title="佐木樱子" class="img x"><img src="//img.hb.aicdn.com/b73f5e6e134a0fbf41b69e030638b6bea2a3a47013c2-dWVTno_sq75sf" data-baiduimageplus-ignore="1" class="avt"></a>
+								<a href="/boards/35625540/" class="name x">我们去拍春天，好吗？</a>
+								<div class="sub">佐木樱子</div>
+							</div>
+							<div class="board-pins cst-scrollbar">
+								<div id="board_pins_waterfall" style="height: 246px;">
+									<a href="/pins/1088507616/" data-id="1088507616" data-seq="1088507616" class="cell x layer-view  " style="position: absolute; left: 0px; top: 0px;"><img src="//img.hb.aicdn.com/3461586d4ac9db4a86a01a8c2445c12a9bafe06518baea-B7SWZy_fw86" width="86" height="57" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507615/" data-id="1088507615" data-seq="1088507615" class="cell x layer-view  selected" style="position: absolute; left: 87px; top: 0px;"><img src="//img.hb.aicdn.com/2b4fc6ff45b03b4721f9f4c34f2fa94719ee10e32e4a8f-Qekzj3_fw86" width="86" height="129" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507614/" data-id="1088507614" data-seq="1088507614" class="cell x layer-view  " style="position: absolute; left: 174px; top: 0px;"><img src="//img.hb.aicdn.com/44391d1c26d8256629f56890f6f6d71613f26ac220e514-KMZjsE_fw86" width="86" height="57" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507613/" data-id="1088507613" data-seq="1088507613" class="cell x layer-view  " style="position: absolute; left: 0px; top: 58px;"><img src="//img.hb.aicdn.com/66d51ffabdf9a061a2540d428cbb2e9515dd48ad17b0b4-7CV2s8_fw86" width="86" height="57" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507612/" data-id="1088507612" data-seq="1088507612" class="cell x layer-view  " style="position: absolute; left: 174px; top: 58px;"><img src="//img.hb.aicdn.com/b53d33cd869db4eb3a11a165ba16e625085693781148a6-yoKUoB_fw86" width="86" height="129" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507611/" data-id="1088507611" data-seq="1088507611" class="cell x layer-view  " style="position: absolute; left: 0px; top: 116px;"><img src="//img.hb.aicdn.com/a9bb802656f1fc06911b43706650e562af47b1811e6090-Qo1Lky_fw86" width="86" height="117" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507610/" data-id="1088507610" data-seq="1088507610" class="cell x layer-view  " style="position: absolute; left: 87px; top: 130px;"><img src="//img.hb.aicdn.com/2fd628a42e13f1f8442967c2c193124bc8e0b2b41bf87e-3rD1i4_fw86" width="86" height="57" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507609/" data-id="1088507609" data-seq="1088507609" class="cell x layer-view  " style="position: absolute; left: 87px; top: 188px;"><img src="//img.hb.aicdn.com/0180c2bc43faa6b34231076167fc4b32cf7eb9a33e86df-73PCap_fw86" width="86" height="57" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+									<a href="/pins/1088507608/" data-id="1088507608" data-seq="1088507608" class="cell x layer-view  " style="position: absolute; left: 174px; top: 188px;"><img src="//img.hb.aicdn.com/961ac257b2ea6e2134b606b18a00a9623e29149917fde8-R1gDQE_fw86" width="86" height="57" data-baiduimageplus-ignore="1">
+										<div class="cover"></div>
+									</a>
+								</div>
+								<div class="loading" style="display: block;"><img src="/img/end.png"></div>
+							</div>
+							<a data-id="35625540" href="#" onclick="return false;" class="follow-btn btn"><span class="text"> 关注画板</span></a>
+						</div>
+
+					</div>
+					<div class="clear"></div>
+				</div>
+
+			</div>
+			<div class="pin-view-arrows">
+				<a style="visibility: visible; position: fixed; right: 17px;" class="next x layer-view" href="/pins/1088507614/" data-id="1088507614"></a>
+				<a style="visibility: visible; position: fixed; left: 0px;" class="prev x layer-view" href="/pins/1088507616/" data-id="1088507616"></a>
+			</div>
+			<div id="layout_elevator_item" class="elevator-item">
+				<a id="layout_elevator" onclick="return false;" title="回到顶部" class="off"></a>
+				<a class="plus"></a>
+				<div class="plus-popup">
+					<div class="group">
+						<a onclick="app.showUploadDialog();">添加采集<i class="upload"></i></a>
+						<a class="add-board-item">添加画板<i class="add-board"></i></a>
+						<a href="/about/goodies/">安装采集工具<i class="goodies"></i></a>
+					</div>
+					<div class="arr"></div>
+				</div>
+			</div>
+			<div style="display: none" data-img="//img.hb.aicdn.com/2b4fc6ff45b03b4721f9f4c34f2fa94719ee10e32e4a8f-Qekzj3" class="zoom-layer">
+				<div class="holder"></div>
+				<div class="close-zoom"></div>
+			</div>
+		</div>
+		<!--
+        	弹窗
+        -->
+		<script src="/js/libs/jquery/jquery.js"></script>
+		<script src="/js/libs/handlebars/handlebars.js"></script>
+		<script src="/js/waterfall.min.js"></script>
+  <script type="text/javascript" src="/js/js.js" ></script>
+		<script>
+
+
+
+			$('#container').waterfall({
+				itemCls: 'item',
+				colWidth: 236,
+				gutterWidth: 15,
+				gutterHeight: 15,
+				checkImagesLoaded: false,
+	      maxPage: <%=maxPage%>,
+       path: function(page) {
+       return '/imgs/<%=type%>/ok/'+page;
+      }
+			});
+		</script>
+
+	</body>
+
+</html>
