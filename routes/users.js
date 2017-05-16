@@ -74,7 +74,8 @@ router.get('/personal/:id', function(req, res, next) {
 			"user_id": req.session.user_id ? req.session.user_id : req.params.id,
 			"avatar": req.session.avatar ? req.session.avatar : "default.jpg",
 			"list": result,
-			"changTime":_util.getDateDiff
+			"changTime":_util.getDateDiff,
+			"activePage":0,
 		});
 
 	});
@@ -111,13 +112,13 @@ router.all('/updateAvatar',function(req,res,next){
 			//req.session.imgurl = path.basename(newPath);
 			user.updateAvatar({"avatar":path.basename(newPath),"id":req.session.user_id},function(err,result){
 				console.log(err);
-				
+
 				if(err) return res.json({ "status": 0, "error": "修改失败！！" });
 			          console.log("---------"+result);
 			          req.session.avatar=path.basename(newPath);
 				return res.json({ "status": 1 });
 			})
-			
+
 		})
 
 	})

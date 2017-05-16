@@ -43,11 +43,11 @@ router.all('/details_1/:id', function(req, res, next) {
 	}
 
 });
-router.all('/details/:id', function(req, res, next) {
+router.all('/details', function(req, res, next) {
+ console.log(req.query.id);
+	if(req.query.id) {
 
-	if(req.params.id) {
-
-		imgs.findOne(parseInt(req.params.id), function(err, result1) {
+		imgs.findOne(parseInt(req.query.id), function(err, result1) {
 
 			if(err) return res.json({ "status": 0, "error": "获取失败！！" });
 
@@ -55,20 +55,20 @@ router.all('/details/:id', function(req, res, next) {
 				return res.json({ "status": 0, "error": "图片不存在！！" });
 			imgs.userFindAll(result1[0]['user_id'], function(err, result2) {
 				if(err) return res.json({ "status": 0, "error": "获取失败！！" });
-				comments.imgIdFindAll(parseInt(req.params.id), function(err, result3) {
-                     console.log(result3);
-					res.render('details', {
-						"username": req.session.username ? req.session.username : null,
-						"user_id": req.session.user_id ? req.session.user_id : null,
-						"type": req.session.type ? req.session.type : null,
-						"avatar": req.session.avatar ? req.session.avatar : "default.jpg",
-
-						"imgData": result1[0],
-						"imglist": result2,
-						"comments": result3,
-						"changeTime": _util.getDateDiff
-
-					});
+				comments.imgIdFindAll(parseInt(req.query.id), function(err, result3) {
+     return    res.json({ "status": 1, "result":{"imgData":result1[0],"imglist": result2,"comments":result3}});
+					// res.render('details', {
+					// 	"username": req.session.username ? req.session.username : null,
+					// 	"user_id": req.session.user_id ? req.session.user_id : null,
+					// 	"type": req.session.type ? req.session.type : null,
+					// 	"avatar": req.session.avatar ? req.session.avatar : "default.jpg",
+					//
+					// 	"imgData": result1[0],
+					// 	"imglist": result2,
+					// 	"comments": result3,
+					// 	"changeTime": _util.getDateDiff
+					//
+					// });
 				})
 
 			});
@@ -170,6 +170,7 @@ router.get('/addshow', _util.checkLogin);
 router.get('/addshow', function(req, res, next) {
 
 	res.render('addImgs', {
+			"activePage":0,
 		"username": req.session.username ? req.session.username : null,
 		"user_id": req.session.user_id ? req.session.user_id : null,
 		"avatar": req.session.avatar ? req.session.avatar : "default.jpg"
@@ -276,6 +277,7 @@ router.get('/updateshow/:id', function(req, res, next) {
 			return res.json({ "status": 0, "error": "作品不存在!!" });
 		console.log(result);
 		res.render('updateImg', {
+				"activePage":0,
 			"username": req.session.username ? req.session.username : null,
 			"user_id": req.session.user_id ? req.session.user_id : null,
 			"avatar": req.session.avatar ? req.session.avatar : "default.jpg",

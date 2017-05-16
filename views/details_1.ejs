@@ -1,8 +1,54 @@
 <%- include top %>
-<%- include commonHeader %>
 
+	<link rel="stylesheet" href="/css/style.css" />
+<%- include pop %>
+<div id="header" class="" style="left: 0px;">
+			<div class="wrapper" style="width: 1244px;">
+				<div class="menu-bar">
+					<div class="left-part">
+						<a id="huaban" href="/"></a>
+						<a href="/" data-title="home"<% if(activePage==1){ %> class="header-item active"<%}else{%> class="header-item" <%}%> >首页</a>
 
-<div class="details">
+						<a href="/imgs/s/show"<% if(activePage==2){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>学生精品<i class="muse entrance"></i></a>
+						<a  href="/imgs/t/show/"  <% if(activePage==3){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>老师精品</a>
+					</div>
+					<div class="right-part">
+
+			 <% if(username&&avatar) {%>
+
+				 <div class="message-nav">
+					<a title="通知" href="/users/logout" class="nav-link" style="color:#E54646">
+						退出
+
+					</a>
+
+				 </div>
+					 <div id="nav_user">
+							<a href="/users/personal/<%= user_id %>" class="nav-link dm-nav"><img width="26" height="26" src="/avatar/<%=avatar%>"  class="avt">
+								<div class="arrow"></div>
+								<!-- <div class="num ">1</div> -->
+							</a>
+
+						</div>
+
+					<%}else{%>
+						<div class="right-part">
+							<div class="login-nav">
+								<a href="javascript:;"  id="register" class="register btn rbtn" style="color:#fff;background:linear-gradient( #F45D68, #E54646)">
+								<span class="text"> 注册</span></a>
+								<a   href="javscript:;" class="login btn wbtn">
+									<span class="text"  id="login"> 登录</span>
+								</a>
+							</div>
+						</div>
+
+					<%}%>
+
+				</div>
+			</div>
+</div>
+</div>
+<div class="details" style="padding-top:80px;">
 	<div class="container clearfix">
 		<div class="details-l fl">
 			<div class="d-section">
@@ -46,7 +92,7 @@
 				<div class="add-comments">
 					<div class="add-comments-t">
 						<img src="/avatar/<%=avatar%>" class="citem-avatar fl" />
-						<textarea name="caption" placeholder="添加评论" class="clear-input add-comments-text " id="c-content" autocomplete="off"></textarea>
+						<textarea name="caption" placeholder="添加评论" class="clear-input add-comments-text " id="c-content" autocomplete="off" style="width:639px"></textarea>
 					</div>
 					<a href="javascript:;" class="btn add-comments-btn fr" id="c-add">添加评论</a>
 				</div>

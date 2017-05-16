@@ -1,93 +1,159 @@
-<%- include top %>
-<link rel="stylesheet" href="/css/webuploader.css" />
-<div class="bgs">
-	<ul>
-		<li class="bgColor_1" data-bg=""></li>
-		<li class="bgColor_2"></li>
-		<li class="bgColor_3"></li>
+<!doctype html>
+<html lang="zh-CN">
 
-		<li class="bgColor_4"></li>
-	</ul>
-	<div class="bgs-btns">
-		<a href="javascript:void(0);" class="save btn">保存</a>
-		<a href="javascript:void(0);" class="dl btn">取消</a>
-	</div>
+	<head>
+		<meta charset="UTF-8">
+		<title>infinitescroll</title>
+<link rel="stylesheet" href="/css/app.css" />
+		<link rel="stylesheet" href="/css/reset.css">
+		<link rel="stylesheet" href="/css/index.css">
+		<link rel="stylesheet" href="/css/waterfall.css">
+		<link rel="stylesheet" href="/css/style.css" />
+	</head>
+	<style>
+		html,
+		body {
+			background: url(./images/bg.gif) repeat #edece9;
+		}
+	</style>
+
+	<body>
+<div id="header" class="" style="left: 0px;">
+			<div class="wrapper" style="width: 1244px;">
+				<div class="menu-bar">
+					<div class="left-part">
+						<a id="huaban" href="/"></a>
+						<a href="/" data-title="home"<% if(activePage==1){ %> class="header-item active"<%}else{%> class="header-item" <%}%> >首页</a>
+
+						<a href="/imgs/s/show"<% if(activePage==2){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>学生精品<i class="muse entrance"></i></a>
+						<a  href="/imgs/t/show/" <% if(activePage==3){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>老师精品</a>
+					</div>
+					<div class="right-part">
+
+	     <% if(username&&avatar) {%>
+
+				 <div class="message-nav">
+				 	<a title="通知" href="/users/logout" class="nav-link" style="color:#E54646">
+				 		退出
+
+				 	</a>
+
+				 </div>
+					 <div id="nav_user">
+							<a href="/users/personal/<%= user_id %>" class="nav-link dm-nav"><img width="26" height="26" src="/avatar/<%=avatar%>"  class="avt">
+								<div class="arrow"></div>
+								<!-- <div class="num ">1</div> -->
+							</a>
+
+						</div>
+
+          <%}else{%>
+						<div class="right-part">
+							<div class="login-nav">
+								<a href="javascript:;"  id="register" class="register btn rbtn" style="color:#fff;background:linear-gradient( #F45D68, #E54646)">
+								<span class="text"> 注册</span></a>
+								<a   href="javscript:;" class="login btn wbtn">
+									<span class="text"  id="login"> 登录</span>
+								</a>
+							</div>
+						</div>
+
+          <%}%>
+
+				</div>
+			</div>
 </div>
-<div class="set-bg" style="background: url(/img/body_bg_page.jpg);min-height: 100%;">
-	<div class="personal-top">
-		<div class="container">
+</div>
+<div id="user_page" style="padding-top: 80px;">
+			<div class="wrapper clearfix" style="width: 1244px;">
+				<div id="user_card">
+					<div class="maozi"></div>
+					<div class="inner clearfix without-side">
+						<div class="avatar-unit">
+							<div class="img"><img src="/avatar/<%= avatar %>"  height="140" width="140" class="current-avatar"><img src="/img/load2.gif" style="display:none;" data-baiduimageplus-ignore="1" class="load">
+								<div class="change-avatar">
+									<a class="btn wbtn btn12" id="change-avatar"><span class="text">更换头像</span></a>
+									<div style="position: absolute; opacity: 0.01; overflow: hidden;"><iframe src="javascript:'<html></html>'" frameborder="no" border="0" name="IFrame_j2osyh8k" id="IFrame_j2osyh8k" style="display: none;"></iframe><input type="file" name="file" size="1" style="position: absolute; top: 0px; left: 0px; border: 0px;"></div>
+								</div>
+							</div>
+							<div class="counts clearfix">
+								<a href="/w1123224/followers/" rel="nofollow" class="followers">
+									<div class="num">0</div>
+									<div class="sub">粉丝</div>
+								</a>
+								<a href="/w1123224/following/" class="follows">
+									<div class="num">4</div>
+									<div class="sub">关注</div>
+								</a>
+							</div>
+						</div>
+						<div class="head-line">
+							<div class="name"><%= username %></div>
+							<a href="/muse/register/" ><i class="v-icon unverified"></i></a>
+						</div>
+						<ul class="introduction"></ul>
+						<div class="about clearfix"></div>
+						<!--<div class="action-buttons">
+							<a href="/settings/" class="btn btn14"><span class="text"> 帐号设置</span></a>
+						</div>-->
+						<div class="bindings"></div>
+					</div>
+					<div class="tabs">
+						<a href="/w1123224/" class="tab active">2画板</a>
+						<a href="/w1123224/pins/" class="tab ">1采集</a>
+						<a href="/w1123224/likes/" class="tab ">1喜欢</a>
+						<a href="/w1123224/tags/" rel="nofollow" class="tab ">标签</a>
 
-			<div class="personal-header  clearfix">
-
-				<a href="javascript:void(0);" class="change-bg">更换背景</a>
-				<ul class="nav fr">
-					<li>
-						<a href="/" style="color: #222;">返回首页</a>
-					</li>
-				</ul>
-
-			</div>
-			<div class="personal-info">
-				<div class="avatar">
-					<img src="/avatar/<%= avatar %>" />
+						<div class="search-hint"></div>
+					</div>
 				</div>
-				<p>
-					<%= username%>
-				</p>
-			</div>
-		</div>
-	</div>
-	<div class="personal-content">
+				<div id="waterfall" class="sort-lists clearfix sortable">
+					<div class="wfc add-board">
+						  <a href="/imgs/addshow"><div class="inner"><i></i><span>上传作品</span></div></a>
+					</div>
+						<% for(var t=0;t<list.length;t++){ %>
+					<div  class="Board wfc inited mitem">
+						<div class="draglay"></div>
 
-		<div class="personal-show">
-			<div class="container">
-				<div class="show-top container">
-					<h3 class="tit  fl">我的作品</h3>
-					<a href="/imgs/addshow" class="upload fr btn"><img src="/img/upload.png" / class="icon-upload">上传个人作品</a>
-				</div>
+						<a href="/imgs/details_1/<%=list[t]['id']%>"  class="link  x">
+							<img  src="/upload/<%=list[t]['imgurl']%>" width="100%" >
 
-				<ul class="nav  newlist clearfix">
-					<%   for(var i=0;i<list.length;i++) {%>
-					<li>
-						<a href="/imgs/details/<%=list[i]['id']%>">
-							<img class="imgItem-img" src="/upload/<%=list[i]['imgurl']%>" width="265" height="180" />
-							<div class="imgItem-text">
-								<p class="description">
-									<%=list[i]['description']%>
-								</p>
-								<p class="img-info">
-									<span class="author-text"><%=list[i]['username']%></span>
-									<span class="time"><%=changTime(list[i]['create_time'])%></span>
-									<span class="c-number fr">评论（<%=list[i]['c_count']%>）</span>
-								</p>
+							<div class="over ">
+								<!-- <h3>sss</h3> -->
+								<h4><%=list[t]['description']%></h4>
+								<!--<div class="pin-count">1</div>-->
 							</div>
 
 						</a>
-						<span class="img-del" data-imgId="<%=list[i]['id']%>">删除</span>
-						<a class="img-update" href="/imgs/updateshow/<%=list[i]['id']%>">编辑</a>
-					</li>
 
-					<%}%>
-				</ul>
-				<% if(list.length<=0){ %>
-				<li style="text-align: center;font-size:18px;color: #999;">还未上传作品....</li>
-				<%}%>
+
+						<div class="FollowBoard">
+							<a  class="btn btn14 wbtn" href="/imgs/updateshow/<%=list[t]['id']%>" style="width:30%;display:inline-block"><strong> 编辑</strong><span></span></a>
+							<a class="img-del btn btn14 wbtn"  style="background: rgba(218, 10, 10, 0.81);border-color:#c90000 !important;box-shadow:none; color:#fff;width:30%;display:inline-block" data-imgId="<%=list[t]['id']%>">删除</a>
+						<!-- 	<a class="img-update" href="/imgs/updateshow/<%=list[t]['id']%>">编辑</a> -->
+						</div>
+					</div>
+           <% } %>
+				</div>
 			</div>
 		</div>
 
-	</div>
-</div>
+
+
+<link rel="stylesheet" href="/css/webuploader.css" />
+
+
 <div class="pop  updat-aavatar" id="pop" style="display: none;">
 	<div class="pop-bg"></div>
 	<div class="pop-content">
 		<span class="close" id="close"></span>
 
-		<span class="clear-label" style="display: block;padding-bottom: 50px;">上传头像：</span>
+		<span class="clear-label" style="display: block;padding-bottom: 50px;">上传头像(以上传的最后一张图片为准)：</span>
 		<!--dom结构部分-->
 		<div id="uploader-demo" style="display: inline-block;vertical-align: middle;">
 
-			<div id="filePicker" class="btn">选择图片</div>
-          
+			<div id="filePicker" class="">选择图片</div>
+
 		</div>
 		<!--用来存放item-->
 		<div id="fileList" class="uploader-list" style="margin-left: 48px;"></div>
@@ -98,8 +164,20 @@
 <script src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/webuploader.min.js"></script>
+<script type="text/javascript" src="/js/gridify-min.js" ></script>
 <script>
 	$(function() {
+		var options =
+		{
+			srcNode: 'li',             // grid items (class, node)
+			margin: '15px',             // margin in pixel, default: 0px
+			width: '250px',             // grid item width in pixel, default: 220px
+			max_width: '',              // dynamic gird item width if specified, (pixel)
+			resizable: true,            // re-layout if window resize
+			transition: 'all 0.5s ease' // support transition for CSS3, default: all 0.5s ease
+		}
+		$('.grid').gridify(options);
+
 		$('.change-bg').click(function() {
 			$('.bgs').slideToggle();
 		});
@@ -122,7 +200,7 @@
 						return;
 					} else if(data.status == 1) {
 						alert(data.success);
-						_this.parent('li').remove();
+						_this.parents('.mitem').remove();
 
 					}
 				}
@@ -130,17 +208,17 @@
 		});
 
 		/*上传头像*/
-		$('.avatar').click(function() {
+		$('#change-avatar').click(function() {
 			$('#pop').show();
 		})
-		
+
 		$("#filePicker").click(function(){
 			$('#rt_rt_1bb83ad0k1gpm12issnfe54liq1').css({
 			width:94,
 			height:45
 		})
 		})
-		
+
 	var uploader_2 = WebUploader.create({
 
 		// 选完文件后，是否自动上传。
@@ -150,7 +228,7 @@
 
 		// 文件接收服务端。
 		server: '/users/updateavatar',
-fileNumLimit:1,
+    fileNumLimit:1,
 		// 选择文件的按钮。可选。
 		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
 		pick: '#filePicker',

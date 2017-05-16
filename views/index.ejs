@@ -6,7 +6,7 @@
     	   </h1>
 		<ul class="nav header-nav fl">
 			<li>
-				<a href="/" class="active">最新</a>
+				<a href="/" class="active">首页</a>
 			</li>
 			<li>
 				<a href="/imgs/s/show">学生精品</a>
@@ -15,32 +15,41 @@
 				<a href="/imgs/t/show/">老师精品</a>
 			</li>
 		</ul>
-		<ul class="nav fr">
-			<% if(username&&avatar) {%>
-			<li class="playd">
-				<a href="javascript:;" class="header-avatar"><img src="/avatar/<%= avatar %>" /></a>
-				<ul class="play-dw">
-					<li>
-						<a href="users/personal/<%= user_id %>">个人中心</a>
-					</li>
-					<li style="border: none;">
-						<a href="/users/logout">退出</a>
-					</li>
+		<div class="right-part fr" style="width:118px">
 
-				</ul>
+ <% if(username&&avatar) {%>
 
-			</li>
-			<%} else{%>
 
-			<li>
-				<a href="javascript:;" id="register" class="btn aregister">注册</a>
-			</li>
-			<li>
-				<a href="javascript:;" id="login" class="btn alogin">登录</a>
+		<a title="通知" href="/users/logout" class="nav-link" style="color:#E54646">
+			退出
 
-			</li>
-			<%  } %>
-		</ul>
+		</a>
+
+
+		 <div id="nav_user" class="fr" >
+				<a href="/users/personal/<%= user_id %>" class="nav-link dm-nav" style="top:6px;position:relative"><img width="26" height="26" src="/avatar/<%=avatar%>"  class="avt">
+					<div class="arrow"></div>
+					<!-- <div class="num ">1</div> -->
+				</a>
+
+			</div>
+
+		<%}else{%>
+			<div class="right-part fr">
+				<div class="login-nav">
+					<a href="javascript:;"  id="register" class="register btn rbtn" style="color:#fff;background:linear-gradient( #F45D68, #E54646);    height: 34px;
+    line-height: 34px;">
+					<span class="text"> 注册</span></a>
+					<a   href="javscript:;" class="login btn wbtn" style="    height: 34px;
+    line-height: 34px;">
+						<span class="text"  id="login"> 登录</span>
+					</a>
+				</div>
+			</div>
+
+		<%}%>
+
+	</div>
 
 	</div>
 </div>

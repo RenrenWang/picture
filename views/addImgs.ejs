@@ -1,60 +1,54 @@
 <%- include top %>
+<link rel="stylesheet" href="/css/style.css" />
 <div id="header" class="" style="left: 0px;">
 	<div class="wrapper" style="width: 1244px;">
 		<div class="menu-bar">
 			<div class="left-part">
 				<a id="huaban" href="/"></a>
-				<a href="/" data-title="home" class="header-item active">首页</a>
-				<a href="/discovery/" class="header-item ">发现</a>
-				<a href="/all/" class="header-item ">最新</a>
-				<a href="https://muse.huaban.com/" class="header-item meisi">美思<i class="muse entrance"></i></a>
-				<a href="http://meia.me" target="_blank" class="header-item">教育</a>
-				<div class="menu-nav">
-					<div class="header-main-menu" style="display: none;">
-						<div class="top-module">
-							<a href="/apps/" rel="nofollow" class="text app-link">移动应用</a>
-							<a href="/about/goodies/" rel="nofollow" class="text app-link">采集工具</a>
-							<a href="/activities/" rel="nofollow" class="text pin-link">活动</a>
-						</div>
-						<div id="category_more" class="middle-module clearfix">
-							<div class="col-1 col">
-								<a href="/favorite/web_app_icon/" rel="nofollow" data-id="web_app_icon" class="category-link">UI/UX</a>
-								<a href="/favorite/design/" rel="nofollow" data-id="design" class="category-link">平面</a>
-								<a href="/favorite/illustration/" rel="nofollow" data-id="illustration" class="category-link">插画/漫画</a>
-								<a href="/favorite/home/" rel="nofollow" data-id="home" class="category-link">家居/家装</a>
-								<a href="/favorite/apparel/" rel="nofollow" data-id="apparel" class="category-link">女装/搭配</a>
-							</div>
-							<div class="col-2 col">
-								<a href="/favorite/men/" rel="nofollow" data-id="men" class="category-link">男士/风尚</a>
-								<a href="/favorite/wedding_events/" rel="nofollow" data-id="wedding_events" class="category-link">婚礼</a>
-								<a href="/favorite/industrial_design/" rel="nofollow" data-id="industrial_design" class="category-link">工业设计</a>
-								<a href="/favorite/photography/" rel="nofollow" data-id="photography" class="category-link">摄影</a>
-								<a href="/categories/" rel="nofollow" data-id="more" class="all-categories-link category-link">兴趣/生活 »</a>
-							</div>
-						</div>
+				<a href="/" data-title="home"<% if(activePage==1){ %> class="header-item active"<%}else{%> class="header-item" <%}%> >首页</a>
 
-					</div>
-				</div>
+				<a href="/imgs/s/show"<% if(activePage==2){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>学生精品<i class="muse entrance"></i></a>
+				<a  href="/imgs/t/show/"  <% if(activePage==3){ %> class="header-item active"<%}else{%>class="header-item"<%}%>>老师精品</a>
 			</div>
 			<div class="right-part">
-				<a style="display: none" href="#" onclick="return false;" class="go-mobile btn rbtn"><span class="text"> 访问移动版</span></a>
 
-				<div id="nav_user">
-					<a href="/w1123224/" class="nav-link dm-nav"><img width="26" height="26" src="//img.hb.aicdn.com/eead355b732f022f1fb52a00528c25bb4386a3621265-qQOGuE_sq75sf" data-baiduimageplus-ignore="1" class="avt">
+	 <% if(username&&avatar) {%>
+
+		 <div class="message-nav">
+			<a title="通知" href="/users/logout" class="nav-link" style="color:#E54646">
+				退出
+
+			</a>
+
+		 </div>
+			 <div id="nav_user">
+					<a href="/users/personal/<%= user_id %>" class="nav-link dm-nav"><img width="26" height="26" src="/avatar/<%=avatar%>"  class="avt">
 						<div class="arrow"></div>
-						<div class="num ">1</div>
+						<!-- <div class="num ">1</div> -->
 					</a>
 
 				</div>
-			</div>
 
-			<div class="search-hint"></div>
+			<%}else{%>
+				<div class="right-part">
+					<div class="login-nav">
+						<a href="javascript:;"  id="register" class="register btn rbtn" style="color:#fff;background:linear-gradient( #F45D68, #E54646)">
+						<span class="text"> 注册</span></a>
+						<a   href="javscript:;" class="login btn wbtn">
+							<span class="text"  id="login"> 登录</span>
+						</a>
+					</div>
+				</div>
+
+			<%}%>
+
 		</div>
 	</div>
 </div>
+</div>
 
 <link rel="stylesheet" href="/css/webuploader.css" />
-<div class="add-content">
+<div class="add-content" style="padding-top:80px">
 	<div class="container">
 		<h3>
 			作品上传
@@ -70,7 +64,7 @@
 				<!--dom结构部分-->
 				<div id="uploader-demo" style="display: inline-block;vertical-align: middle;">
 
-					<div id="filePicker" class="btn">选择图片</div>
+					<div id="filePicker" >选择图片</div>
 
 				</div>
 				<!--用来存放item-->
