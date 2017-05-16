@@ -245,7 +245,8 @@ $('.list-more').on('click',function(){
 	}
 
 	function html_img(img_id, imgurl) {
-		return '<div class="recommend-imgbox recommend-box"><a href="/imgs/details_1/' + img_id + '"><img src="/upload/' + imgurl + '"></a></div>';
+		//<img src="/upload/' + imgurl + '">
+		return '<div class="recommend-imgbox recommend-box"><a href="/imgs/details_1/' + img_id + '" style="background:url(/upload/' + imgurl + ') no-repeat center center; display: block;width: 100%;height: 100%;"></a></div>';
 	}
 
 	function html_text_l(img_id,img_description, c_count, img_username) {
@@ -267,7 +268,7 @@ $('.list-more').on('click',function(){
 	function html_img_text(img_id, imgurl, img_description, c_count, img_username) {
 		return '<div class="recommend-hidebox pl-right">' +
 			'<div class="recommend-imgbox recommend-box">' +
-			'<a href="/imgs/details_1/'+img_id+'"><img src="/upload/' + imgurl + '"></a>' +
+			'<a href="/imgs/details_1/'+img_id+'"  style="background:url(/upload/' + imgurl + ') no-repeat center center; display: block;width: 100%;height: 100%;"></a>' +
 			'</div>' +
 			'<div class="recommend-infobox board recommend-box big">' +
 			'<div class="recommend-data board"></div>' +
