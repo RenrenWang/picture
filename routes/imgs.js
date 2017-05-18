@@ -322,7 +322,7 @@ router.get('/page/:page', function(req, res, next) {
 			return res.json({ "status": 0, "error": "没有更多数据" });;
 		}
 
-		return res.json({ "status": 1, "list": { "total": result.length, "imglist": result } });
+		return res.json({ "status": 1,"total": result.length, "result":result});
 
 	});
 
