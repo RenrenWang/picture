@@ -722,8 +722,8 @@ a.upload {
 .newlist>li {
 	position: relative;
 }
-/*.img-del,*/
-.img-update,.cj-btn,.dz-btn{
+
+.img-del,.img-update,.cj-btn,.dz-btn{
 	position: absolute;
 	right: 20px;
 	top: 10px;

@@ -98,15 +98,15 @@ $(function() {
 		$dom.prepend('<p class="error red-link">' + error + '</p>');
 	}
 });
-// $(document).on('click','.showPanel',function(){
-// 	        //  alert($(this).attr('data-id'));
-// 					 $('.w-panel').show();
-// 					 $('#iframe').attr('src','http://192.168.0.8:8080/imgs/details/'+$(this).attr('data-id'));
-// });
+$(document).on('click','.showPanel',function(){
+	        //  alert($(this).attr('data-id'));
+					 $('.w-panel').show();
+					 $('#iframe').attr('src','http://192.168.0.8:8080/imgs/details/'+$(this).attr('data-id'));
+});
 
-// $('.w-panel-close').click(function(){
-// 	$('.w-panel').hide();
-// });
+$('.w-panel-close').click(function(){
+	$('.w-panel').hide();
+});
 
 $(document).on('mouseover','.showPanel',function(){
 	$(this).find('.dz-btn,.cj-btn').show();
