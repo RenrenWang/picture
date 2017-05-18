@@ -59,13 +59,13 @@ body,html{
 }
 .logo>a{
 	display: inline-block;
-	height: 28px;
-	width:80px;
-	background: url(../img/logo_wt.svg) no-repeat  center;
+	height: 30px;
+	width:30px;
+	background: url(../img/logo.png) no-repeat  center/contain;
 }
 
 .logo>a.logoActive{
-	background-image: url(../img/logo.svg) !important;
+	background-image: url(../img/logo_wt.png) !important;
 }
 .header>h1 {
 	overflow: hidden;

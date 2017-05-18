@@ -1,4 +1,4 @@
-html {
+lofinhtml {
 	background: url(../images/bg.gif) repeat #edece9;
 }
 
@@ -3087,9 +3087,9 @@ a.remove_activity_invite:hover {
 #huaban {
 	float: left;
 	margin-right: 20px;
-	width: 80px;
-	height: 28px;
-	background: url(../images/logo.svg) 0 0 no-repeat
+	width: 30px;
+	height: 30px;
+	background: url(../img/logo_wt.png)  no-repeat center/contain;
 }
 
 .no-svg #huaban {
@@ -3530,7 +3530,7 @@ a.remove_activity_invite:hover {
 
 .menu-bar .login-nav {
 	display: inline-block;
-	width: 114px;
+	width: 120px;
 	line-height: 48px
 }
 
